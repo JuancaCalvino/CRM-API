@@ -1,6 +1,7 @@
 package com.CRM.CRM.Service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class RegisterServiceTest {
 		user.setPassword("contrasena");
 		user.setPhone(666666666);
 		user.setAddress("C/solera");
-		userService.saveUser(user);
+		assertEquals(userService.saveUser(user), user);
+		
 	}
 	
 	@Test

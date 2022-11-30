@@ -1,6 +1,7 @@
 package com.CRM.CRM.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -35,7 +36,7 @@ public class Opportunity {
 	private ArrayList<Account> Accounts = new ArrayList<Account>();
 	
 	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private ArrayList<Contact> Contacts = new ArrayList<Contact>();
+	private List<Contact> Contacts;
 	
 	public User getUser() {
 		return user;
@@ -49,10 +50,10 @@ public class Opportunity {
 	public void setAccounts(ArrayList<Account> accounts) {
 		Accounts = accounts;
 	}
-	public ArrayList<Contact> getContacts() {
+	public List<Contact> getContacts() {
 		return Contacts;
 	}
-	public void setContacts(ArrayList<Contact> contacts) {
+	public void setContacts(List<Contact> contacts) {
 		Contacts = contacts;
 	}
 	public Integer getOpportunity_ID() {

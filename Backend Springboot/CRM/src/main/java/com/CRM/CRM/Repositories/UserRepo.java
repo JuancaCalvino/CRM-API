@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.CRM.CRM.Models.User;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer>{
-	
-	@Query(value="SELECT DISTINCT u FROM Users u WHERE u.Email = :#{#Email} AND u.Password = :#{#Password}", nativeQuery = true)
+public interface UserRepo extends JpaRepository<User, Integer> {
+
+	@Query(value = "SELECT DISTINCT u FROM Users u WHERE u.Email = :#{#Email} AND u.Password = :#{#Password}", nativeQuery = true)
 	List<User> findByEmailPassword(@Param("Email") String Email, @Param("Password") String Password);
-	
+
 }

@@ -33,4 +33,12 @@ public class UserService {
 
 		return userList;
 	}
+
+	// Devuelve todos los usuarios
+	public List<User> retrieveUsers() {
+
+		List<User> userList = userRepository.findAll();
+
+		return userList;
+	}
 }

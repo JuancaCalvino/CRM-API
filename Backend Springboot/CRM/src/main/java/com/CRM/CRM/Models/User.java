@@ -1,6 +1,7 @@
 package com.CRM.CRM.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,13 +44,13 @@ public class User {
     private String Password;
 	
 	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private ArrayList<Opportunity> Opportunities = new ArrayList<Opportunity>();
+	private List<Opportunity> Opportunities;
 
-    public ArrayList<Opportunity> getOpportunities() {
+    public List<Opportunity> getOpportunities() {
 		return Opportunities;
 	}
 
-	public void setOpportunities(ArrayList<Opportunity> opportunities) {
+	public void setOpportunities(List<Opportunity> opportunities) {
 		Opportunities = opportunities;
 	}
 
