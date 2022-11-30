@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Account")
@@ -20,17 +20,17 @@ public class Account {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Account_ID;
-	@NotEmpty
+	@NotBlank(message = "Name is mandatory")
 	private String Name;
-	@NotEmpty
+	@NotBlank(message = "Email is mandatory")
 	private String Email;
-	@NotEmpty
+	@NotBlank(message = "Address is mandatory")
 	private String Address;
-	@NotEmpty
+	@NotBlank(message = "Phone is mandatory")
 	private long Phone;
-	@NotEmpty
+	@NotBlank
 	private Boolean IsCustomer;
-	@NotEmpty
+	@NotBlank
 	private Boolean IsActiveCustomer;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Contact")
@@ -16,9 +16,9 @@ public class Contact {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Contact_ID;
-	@NotEmpty
+	@NotBlank(message = "Method is mandatory")
 	private String Method;
-	@NotEmpty
+	@NotBlank(message = "Date is mandatory")
 	private java.sql.Date Date;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

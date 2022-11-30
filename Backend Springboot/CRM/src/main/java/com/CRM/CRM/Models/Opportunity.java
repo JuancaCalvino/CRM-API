@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Opportunity")
@@ -20,11 +20,11 @@ public class Opportunity {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Opportunity_ID;
-	@NotEmpty
+	@NotBlank(message = "Name is mandatory")
 	private String Name;
-	@NotEmpty
+	@NotBlank(message = "Priority is mandatory")
 	private Integer PriorityLevel;
-	@NotEmpty
+	@NotBlank(message = "Status is mandatory")
 	private String Status;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

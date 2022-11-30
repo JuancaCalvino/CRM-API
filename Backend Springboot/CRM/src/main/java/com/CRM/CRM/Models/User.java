@@ -3,6 +3,7 @@ package com.CRM.CRM.Models;
 import java.util.ArrayList;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "Users")
@@ -18,15 +23,23 @@ public class User {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer User_ID;
-	@NotEmpty
+	
+	@NotBlank(message = "Name is mandatory")
     private String Name;
-	@NotEmpty
+	
+	@NotBlank(message = "Phone is mandatory")
     private long Phone;
-	@NotEmpty
+	
+	@NotBlank(message = "Email is mandatory") 
+	@Email(message="Please provide a valid email address") 
+	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
+	@Column(unique=true)
     private String Email;
-	@NotEmpty
-    private String Address;
-	@NotEmpty
+	
+	@NotBlank(message = "Address is mandatory")
+    private String Address;	
+	
+	@Size(min = 4, max = 15) @NotBlank(message = "Password is mandatory")
     private String Password;
 	
 	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

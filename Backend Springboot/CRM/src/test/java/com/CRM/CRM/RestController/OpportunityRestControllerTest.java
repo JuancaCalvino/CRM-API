@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.CRM.CRM.Controllers.OpportunityController;
-import com.CRM.CRM.Controllers.UserController;
 
 public class OpportunityRestControllerTest {
 
