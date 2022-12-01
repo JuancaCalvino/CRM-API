@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import LoginCard from '../Components/LoginCard';
 
 export default function Home() {
 
@@ -22,6 +23,12 @@ export default function Home() {
             Password: password,
           }),
         };
-        fetch("http://localhost:8080/Users", requestOptions)
+        fetch("http://localhost:8080/api/user/searchUser", requestOptions)
     })
+
+    return (
+      <main>
+        <LoginCard sendLoginData={getLoginData}/>
+      </main>
+    )
 }

@@ -26,7 +26,7 @@ public class UserController {
 
 	//Cuando se registra un usuario, comprueba y luego inserta
 	@CrossOrigin()
-	@PostMapping("/createuser")
+	@PostMapping("/createUser")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
 		
 		User usuario = userService.saveUser(user);
@@ -40,7 +40,7 @@ public class UserController {
 	// Cuando se loguea el user, se comprueba que exista, si no existe se devuelve
 	// un 404 (contraseña o correo no coincide con base de datos)
 	@CrossOrigin()
-	@PostMapping("/verify")
+	@PostMapping("/searchUser")
 	public ResponseEntity<User> loginUser(@RequestBody User user) {		
 
 		List<User> usuarioEncontrado = userService.loginUser(user);
@@ -53,7 +53,7 @@ public class UserController {
 	
 	// Devuelve todos los usuarios
 	@CrossOrigin()
-	@GetMapping("/getusers")
+	@GetMapping("/getUsers")
 	public ResponseEntity<List<User>> returnsUsers() {
 		
 		List<User> userList = userService.retrieveUsers();

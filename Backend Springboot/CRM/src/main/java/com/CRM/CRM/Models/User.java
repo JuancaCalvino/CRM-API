@@ -1,19 +1,17 @@
 package com.CRM.CRM.Models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -22,19 +20,15 @@ import jakarta.validation.constraints.Size;
 @Table(name = "Users")
 public class User {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer User_ID;
-	
 	@NotBlank(message = "Name is mandatory")
     private String Name;
 	
-	@NotBlank(message = "Phone is mandatory")
-    private long Phone;
+	@NotNull(message = "Phone is mandatory")
+    private Integer Phone;
 	
-	@NotBlank(message = "Email is mandatory") 
+	@Id
 	@Email(message="Please provide a valid email address") 
 	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
-	@Column(unique=true)
     private String Email;
 	
 	@NotBlank(message = "Address is mandatory")
@@ -54,14 +48,6 @@ public class User {
 		Opportunities = opportunities;
 	}
 
-	public Integer getUser_ID() {
-        return User_ID;
-    }
-
-    public void setUser_ID(Integer user_ID) {
-        User_ID = user_ID;
-    }
-
     public String getName() {
         return Name;
     }
@@ -70,11 +56,11 @@ public class User {
         Name = name;
     }
 
-    public long getPhone() {
+    public Integer getPhone() {
         return Phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(Integer phone) {
         Phone = phone;
     }
 

@@ -4,12 +4,14 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 
-import Home from ".routes/Home";
-
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  Route,
 } from "react-router-dom";
+
+import Home from "./Routes/home";
+import Root from './Routes/root';
 
 const router = createBrowserRouter([
   {

@@ -1,10 +1,12 @@
 package com.CRM.CRM.Service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.List;
+import java.util.Set;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.CRM.CRM.Models.User;
 import com.CRM.CRM.Repositories.UserRepo;
 import com.CRM.CRM.Services.UserService;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 
 @SpringBootTest
 public class RegisterServiceTest {
@@ -22,6 +29,36 @@ public class RegisterServiceTest {
 	@Autowired
 	UserRepo userRepository;
 	
+	private static ValidatorFactory validatorFactory;
+	private static Validator validator;
+	
+	@BeforeClass
+	public static void createValidator() {
+	    validatorFactory = Validation.buildDefaultValidatorFactory();
+	    validator = validatorFactory.getValidator();
+	}
+	
+	@AfterClass
+	public static void close() {
+	    validatorFactory.close();
+	}
+	
+	@Test
+	void ShouldRegisterSuccessful() {
+		
+		User user = new User();
+		user.setName("Prueba");
+		user.setEmail("testingmail@mail.com");
+		user.setPassword("contrasena");
+		user.setPhone(666666666);
+		user.setAddress("C/solera");
+		
+		userService.saveUser(user);
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertTrue(violations.isEmpty());
+	}
+	
 	@Test
 	void NameFieldShouldNotBeEmpty() {
 		
@@ -31,12 +68,15 @@ public class RegisterServiceTest {
 		user.setPassword("contrasena");
 		user.setPhone(666666666);
 		user.setAddress("C/solera");
-		assertEquals(userService.saveUser(user), user);
 		
+		userService.saveUser(user);
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertFalse(violations.isEmpty());
 	}
 	
 	@Test
-	void userNameShouldBeMailFormat() {
+	void EmailShouldBeMailFormat() {
 
 		User user = new User();
 		user.setName("user");
@@ -44,11 +84,15 @@ public class RegisterServiceTest {
 		user.setPassword("contrasena");
 		user.setPhone(666666666);
 		user.setAddress("C/solera");
+		
 		userService.saveUser(user);
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertFalse(violations.isEmpty());
 	}
 
 	@Test
-	void passwordShouldNotBeEmpty() {
+	void PasswordShouldNotBeEmpty() {
 		
 		User user = new User();
 		user.setName("user");
@@ -56,21 +100,15 @@ public class RegisterServiceTest {
 		user.setPassword("");
 		user.setPhone(666666666);
 		user.setAddress("C/solera");
-		userService.saveUser(user);
-	}
-	
-	@Test
-	void ShouldLoginSuccesful() {
 		
-		User user = new User();
-		user.setEmail("solera@solera.com");
-		user.setPassword("contraseña");
-		List<User> userList= userService.loginUser(user);
-		assertThat(userList.size() != 0);
+		userService.saveUser(user);
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertFalse(violations.isEmpty());
 	}
 	
 	@Test
-	void addressShouldNotBeEmpty() {
+	void AddressShouldNotBeEmpty() {
 		
 		User user = new User();
 		user.setName("user");
@@ -79,26 +117,23 @@ public class RegisterServiceTest {
 		user.setPhone(666666666);
 		user.setAddress("");
 		userService.saveUser(user);
+		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertFalse(violations.isEmpty());
 	}
-
+	
 	@Test
-	void userNameFieldShouldNotBeEmpty() {
+	void PhoneFieldShouldNotBeEmpty() {
 		
 		User user = new User();
-		user.setEmail("");
-		user.setPassword("contraseña");
-		List<User> userList= userService.loginUser(user);
-		assertThat(userList.size() == 0);
-	}
-	
-	@Test
-	void phoneFieldShouldNotBeEmpty() {
+		user.setName("user");
+		user.setEmail("testingmail@testing.com");
+		user.setPassword("password");
+		user.setPhone(null);
+		user.setAddress("street");
+		userService.saveUser(user);
 		
-		
-	}
-	
-	@Test
-	void phoneFieldShouldBePhone() {
-		
+		Set<ConstraintViolation<User>> violations = validator.validate(user);
+		assertFalse(violations.isEmpty());
 	}
 }

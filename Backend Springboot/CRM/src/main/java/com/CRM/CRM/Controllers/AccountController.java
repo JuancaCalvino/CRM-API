@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.CRM.CRM.Models.Account;
@@ -17,6 +18,7 @@ import com.CRM.CRM.Services.AccountService;
 import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/api/account")
 public class AccountController {
 
 	@Autowired
@@ -24,7 +26,7 @@ public class AccountController {
 
 	// Inserta una cuenta en la base de datos
 	@CrossOrigin()
-	@PostMapping("/accounts/account")
+	@PostMapping("/createAccount")
 	public ResponseEntity<Account> registerAccount(@Valid @RequestBody Account account) {
 
 		Account response = accountService.saveAcount(account);
@@ -37,7 +39,7 @@ public class AccountController {
 
 	// Devuelve todas las cuentas
 	@CrossOrigin()
-	@GetMapping("/accounts")
+	@GetMapping("/getAccounts")
 	public ResponseEntity<List<Account>> returnsAccounts() {
 
 		List<Account> accountsList = accountService.retrieveAccounts();

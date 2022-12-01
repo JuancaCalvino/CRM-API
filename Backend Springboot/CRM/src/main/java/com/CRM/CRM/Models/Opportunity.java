@@ -1,7 +1,8 @@
 package com.CRM.CRM.Models;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,11 +30,12 @@ public class Opportunity {
 	private String Status;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "User_id", nullable = false)
+	@JsonIgnore
+    @JoinColumn(name = "Email", nullable = false)
     private User user;
 	
 	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private ArrayList<Account> Accounts = new ArrayList<Account>();
+	private List<Account> Accounts;
 	
 	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Contact> Contacts;
@@ -44,10 +46,10 @@ public class Opportunity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public ArrayList<Account> getAccounts() {
+	public List<Account> getAccounts() {
 		return Accounts;
 	}
-	public void setAccounts(ArrayList<Account> accounts) {
+	public void setAccounts(List<Account> accounts) {
 		Accounts = accounts;
 	}
 	public List<Contact> getContacts() {

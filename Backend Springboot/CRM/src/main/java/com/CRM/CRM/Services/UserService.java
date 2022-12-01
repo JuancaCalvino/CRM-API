@@ -20,11 +20,6 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	// Devuelve todo lo que hay en la base de datos sobre el usuario recibido
-	public User retrieveUser(User user) {
-		return userRepository.getById(user.getUser_ID());
-	}
-
 	// Dado un usuario, comprueba que su email y su contraseña coincida con la de la
 	// base de datos
 	public List<User> loginUser(User user) {
