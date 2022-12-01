@@ -1,20 +1,16 @@
 package com.CRM.CRM.Service;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Set;
-
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.CRM.CRM.Models.Opportunity;
-import com.CRM.CRM.Models.User;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
+
 import com.CRM.CRM.Repositories.OpportunityRepo;
+
 import com.CRM.CRM.Services.OpportunityService;
 
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;

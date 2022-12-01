@@ -1,11 +1,14 @@
 package com.CRM.CRM.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -20,15 +23,19 @@ import jakarta.validation.constraints.Size;
 @Table(name = "Users")
 public class User {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer User_ID;
+	
 	@NotBlank(message = "Name is mandatory")
     private String Name;
 	
 	@NotNull(message = "Phone is mandatory")
     private Integer Phone;
 	
-	@Id
+	@NotBlank(message = "Email is mandatory") 
 	@Email(message="Please provide a valid email address") 
 	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
+	@Column(unique=true)
     private String Email;
 	
 	@NotBlank(message = "Address is mandatory")
@@ -47,6 +54,14 @@ public class User {
 	public void setOpportunities(List<Opportunity> opportunities) {
 		Opportunities = opportunities;
 	}
+
+	public Integer getUser_ID() {
+        return User_ID;
+    }
+
+    public void setUser_ID(Integer user_ID) {
+        User_ID = user_ID;
+    }
 
     public String getName() {
         return Name;
