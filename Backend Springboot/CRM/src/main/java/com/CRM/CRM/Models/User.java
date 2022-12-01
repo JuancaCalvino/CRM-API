@@ -1,8 +1,8 @@
 package com.CRM.CRM.Models;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,28 +23,28 @@ import jakarta.validation.constraints.Size;
 @Table(name = "Users")
 public class User {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
     private Integer User_ID;
 	
-	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Name is mandatory") @JsonProperty
     private String Name;
 	
-	@NotNull(message = "Phone is mandatory")
+	@NotNull(message = "Phone is mandatory") @JsonProperty
     private Integer Phone;
 	
 	@NotBlank(message = "Email is mandatory") 
 	@Email(message="Please provide a valid email address") 
 	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
-	@Column(unique=true)
+	@Column(unique=true) @JsonProperty
     private String Email;
 	
-	@NotBlank(message = "Address is mandatory")
+	@NotBlank(message = "Address is mandatory") @JsonProperty
     private String Address;	
 	
-	@Size(min = 4, max = 15) @NotBlank(message = "Password is mandatory")
+	@Size(min = 4, max = 15) @NotBlank(message = "Password is mandatory") @JsonProperty
     private String Password;
 	
-	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JsonProperty
 	private List<Opportunity> Opportunities;
 
     public List<Opportunity> getOpportunities() {

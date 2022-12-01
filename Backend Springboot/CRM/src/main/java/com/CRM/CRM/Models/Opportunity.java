@@ -3,6 +3,7 @@ package com.CRM.CRM.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,20 +20,20 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "Opportunity")
 public class Opportunity {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
 	private Integer Opportunity_ID;
-	@NotBlank(message = "Name is mandatory")
+	@NotBlank(message = "Name is mandatory") @JsonProperty
 	private String Name;
-	@NotBlank(message = "Priority is mandatory")
+	@NotBlank(message = "Priority is mandatory") @JsonProperty
 	private Integer PriorityLevel;
-	@NotBlank(message = "Status is mandatory")
+	@NotBlank(message = "Status is mandatory") @JsonProperty
 	private String Status;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "User_id", nullable = false)
+    @JoinColumn(name = "User_id", nullable = false) @JsonProperty
     private User user;
 	
-	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JsonProperty
 	private ArrayList<Account> Accounts = new ArrayList<Account>();
 	
 	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

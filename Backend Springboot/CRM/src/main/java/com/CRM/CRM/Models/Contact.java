@@ -1,5 +1,6 @@
 package com.CRM.CRM.Models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,19 +15,19 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "Contact")
 public class Contact {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
 	private Integer Contact_ID;
-	@NotBlank(message = "Method is mandatory")
+	@NotBlank(message = "Method is mandatory") @JsonProperty
 	private String Method;
-	@NotBlank(message = "Date is mandatory")
+	@NotBlank(message = "Date is mandatory") @JsonProperty
 	private java.sql.Date Date;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Account_id", nullable = false)
+    @JoinColumn(name = "Account_id", nullable = false) @JsonProperty
     private Account account;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Opportunity_id", nullable = false)
+    @JoinColumn(name = "Opportunity_id", nullable = false) @JsonProperty
     private Opportunity opportunity;
 	
 	public Account getAccount() {

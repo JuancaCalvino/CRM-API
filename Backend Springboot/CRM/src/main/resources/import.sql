@@ -1,4 +1,4 @@
-INSERT INTO Users VALUES (1234, 'Juanca', 673902582, 'solera@solera.com', 'contraseña', 167890);
+INSERT INTO Users VALUES (1234, 'Calle', 'solera@solera.com', 'Juanca', 'contrasena', 673902582);
 
 INSERT INTO Opportunity VALUES (167890, 'Venta de energia solar', 1, 'Open', 1234);
 
