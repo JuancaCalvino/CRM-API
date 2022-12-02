@@ -3,6 +3,8 @@ package com.CRM.CRM.Repositories;
 import com.CRM.CRM.Models.Account;
 import com.CRM.CRM.Models.Contact;
 import com.CRM.CRM.Models.User;
+import jakarta.transaction.Transaction;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,9 +16,10 @@ import com.CRM.CRM.Models.Opportunity;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface OpportunityRepo extends JpaRepository<Opportunity, Integer> {
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE Opportunity o SET o.Opportunity_ID =:Opportunity_ID, o.Name =:Name, o.PriorityLevel =:PriorityLevel, o.Status =:Status, o.Accounts =:Accounts, o.Contacts =:Contacts, o.user =:user WHERE o.Opportunity_ID = :Opportunity_ID", nativeQuery = true)
+    @Query(value = "SELECT Opportunity SET o.name =:Name, o.priorityLevel =:PriorityLevel, o.status =:Status, o.accounts =:Accounts, o.contacts =:Contacts, o.user =:user WHERE o.opportunity_ID =:Opportunity_ID", nativeQuery = true)
     void update(@Param("Opportunity_ID") Integer Opportunity_ID, @Param("Name") String Name, @Param("PriorityLevel") Integer PriorityLevel, @Param("Status") String Status, @Param("Accounts") List<Account> Accounts, @Param("Contacts") List<Contact> Contacts, @Param("user") User user);
 }

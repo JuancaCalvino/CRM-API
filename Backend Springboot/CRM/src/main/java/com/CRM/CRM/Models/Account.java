@@ -14,7 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Account")
@@ -22,26 +21,26 @@ public class Account {
 
 	@JsonProperty
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Account_ID;
+	private Integer accountID;
 	@JsonProperty
-	private String Name;
+	private String name;
 	@JsonProperty
-	private String Email;
+	private String email;
 	@JsonProperty
-	private String Address;
+	private String address;
 	@JsonProperty
-	private long Phone;
+	private long phone;
 	@JsonProperty
-	private Boolean IsCustomer;
+	private Boolean isCustomer;
 	@JsonProperty
-	private Boolean IsActiveCustomer;
+	private Boolean isActiveCustomer;
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "opportunity_id", nullable = false)
     private Opportunity opportunity;
 	@JsonProperty
-	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Contact> Contacts;
+	@OneToMany(mappedBy = "contactID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Contact> contacts;
 	
 	public Opportunity getOpportunity() {
 		return opportunity;
@@ -50,52 +49,52 @@ public class Account {
 		this.opportunity = opportunity;
 	}
 	public List<Contact> getContacts() {
-		return Contacts;
+		return contacts;
 	}
 	public void setContacts(List<Contact> contacts) {
-		Contacts = contacts;
+		this.contacts = contacts;
 	}
 	
 	public Integer getAccount_ID() {
-		return Account_ID;
+		return accountID;
 	}
 	public void setAccount_ID(Integer account_ID) {
-		Account_ID = account_ID;
+		accountID = account_ID;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 	public long getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(long phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 	public Boolean getIsCustomer() {
-		return IsCustomer;
+		return isCustomer;
 	}
 	public void setIsCustomer(Boolean isCustomer) {
-		IsCustomer = isCustomer;
+		this.isCustomer = isCustomer;
 	}
 	public Boolean getIsActiveCustomer() {
-		return IsActiveCustomer;
+		return isActiveCustomer;
 	}
 	public void setIsActiveCustomer(Boolean isActiveCustomer) {
-		IsActiveCustomer = isActiveCustomer;
+		this.isActiveCustomer = isActiveCustomer;
 	}	
 }

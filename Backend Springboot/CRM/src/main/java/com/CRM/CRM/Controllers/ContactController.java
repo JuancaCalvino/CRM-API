@@ -2,15 +2,11 @@ package com.CRM.CRM.Controllers;
 
 import java.util.List;
 
+import com.CRM.CRM.Models.Opportunity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.CRM.CRM.Models.Contact;
 import com.CRM.CRM.Services.ContactService;
@@ -26,7 +22,7 @@ public class ContactController {
 
 	// Crea un contacto
 	@CrossOrigin()
-	@PostMapping("/createOpportunity")
+	@PostMapping("/createContact")
 	public ResponseEntity<Contact> createContact(@Valid @RequestBody Contact contact) {
 
 		Contact contacto = contactService.saveContact(contact);
@@ -49,4 +45,19 @@ public class ContactController {
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+
+	// Actualiza el contacto dado
+	@CrossOrigin()
+	@PutMapping("/updateContact")
+	public ResponseEntity<Boolean> updateContact(Contact contact) {
+
+		Boolean isUpdated = contactService.updateContact(contact);
+
+		if (isUpdated == true)
+			return new ResponseEntity<>(true, HttpStatus.OK);
+		else
+			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+	}
+
+	//Obtener contacto x
 }

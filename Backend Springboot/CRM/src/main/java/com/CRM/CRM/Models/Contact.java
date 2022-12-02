@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Contact")
@@ -18,11 +17,11 @@ public class Contact {
 
 	@JsonProperty
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Contact_ID;
+	private Integer contactID;
 	@JsonProperty
-	private String Method;
+	private String method;
 	@JsonProperty
-	private java.sql.Date Date;
+	private java.sql.Date date;
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Account_id", nullable = false)
@@ -45,22 +44,22 @@ public class Contact {
 		this.opportunity = opportunity;
 	}
 	
-	public Integer getContact_ID() {
-		return Contact_ID;
+	public Integer getContactID() {
+		return contactID;
 	}
-	public void setContact_ID(Integer contact_ID) {
-		Contact_ID = contact_ID;
+	public void setContactID(Integer contactID) {
+		this.contactID = contactID;
 	}
 	public String getMethod() {
-		return Method;
+		return method;
 	}
 	public void setMethod(String method) {
-		Method = method;
+		this.method = method;
 	}
 	public java.sql.Date getDate() {
-		return Date;
+		return date;
 	}
 	public void setDate(java.sql.Date date) {
-		Date = date;
+		this.date = date;
 	}
 }

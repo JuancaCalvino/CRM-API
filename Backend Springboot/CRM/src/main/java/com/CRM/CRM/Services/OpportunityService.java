@@ -35,7 +35,7 @@ public class OpportunityService {
     public Boolean deleteOpportunity(Opportunity opportunity) {
 
         try {
-            opportunityRepository.delete(opportunity);
+            opportunityRepository.deleteById(opportunity.getOpportunityID());
             return true;
         } catch (Exception e) {
             return false;
@@ -45,7 +45,7 @@ public class OpportunityService {
     // Actualiza la oportunidad dada en la base de datos
     public Boolean updateOpportunity(Opportunity opportunity) {
 
-        Integer Opportunity_ID = opportunity.getOpportunity_ID();
+        Integer Opportunity_ID = opportunity.getOpportunityID();
         String Name = opportunity.getName();
         Integer PriorityLevel = opportunity.getPriorityLevel();
         String Status = opportunity.getStatus();

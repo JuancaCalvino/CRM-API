@@ -3,6 +3,7 @@ package com.CRM.CRM.Controllers;
 import java.util.List;
 
 import com.CRM.CRM.Models.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,9 @@ public class OpportunityController {
 	// Crea una oportunidad con el usuario dado
 	@CrossOrigin()
 	@PostMapping("/createOpportunity")
-	public ResponseEntity<Opportunity> createOpportunity(@Valid @RequestBody Opportunity opportunity, User user) {
+	public ResponseEntity<Opportunity> createOpportunity(@Valid @RequestBody Opportunity opportunity) {
 
-		opportunity.setUser(user);
+
 		Opportunity oportunidad = opportunityService.saveOpportunity(opportunity);
 
 		if (oportunidad != null)
@@ -56,13 +57,13 @@ public class OpportunityController {
 		if(response == true)
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		else
-			return new ResponseEntity<>(true, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
 
 	// Actualiza la oportunidad dada
 	@CrossOrigin()
 	@PutMapping("/updateOpportunity")
-	public ResponseEntity<Boolean> updateOpportunity(Opportunity opportunity) {
+	public ResponseEntity<Boolean> updateOpportunity(@RequestBody Opportunity opportunity) {
 
 		Boolean isUpdated = opportunityService.updateOpportunity(opportunity);
 
