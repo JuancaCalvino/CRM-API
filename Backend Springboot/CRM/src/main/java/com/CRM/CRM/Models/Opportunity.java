@@ -1,7 +1,9 @@
 package com.CRM.CRM.Models;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,30 +14,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Opportunity")
 public class Opportunity {
-	
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Opportunity_ID;
-	@NotEmpty
-	private String Name;
-	@NotEmpty
-	private Integer PriorityLevel;
-	@NotEmpty
-	private String Status;
-	
+	private Integer opportunityID;
+
+	private String name;
+	private Integer priorityLevel;
+	private String status;
+
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "User_id", nullable = false)
     private User user;
-	
-	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private ArrayList<Account> Accounts = new ArrayList<Account>();
-	
-	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private ArrayList<Contact> Contacts = new ArrayList<Contact>();
+
+	@OneToMany(mappedBy = "accountID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Account> accounts;
+
+	@OneToMany(mappedBy = "contactID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Contact> contacts;
 	
 	public User getUser() {
 		return user;
@@ -43,40 +43,40 @@ public class Opportunity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public ArrayList<Account> getAccounts() {
-		return Accounts;
+	public List<Account> getAccounts() {
+		return accounts;
 	}
-	public void setAccounts(ArrayList<Account> accounts) {
-		Accounts = accounts;
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
-	public ArrayList<Contact> getContacts() {
-		return Contacts;
+	public List<Contact> getContacts() {
+		return contacts;
 	}
-	public void setContacts(ArrayList<Contact> contacts) {
-		Contacts = contacts;
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
-	public Integer getOpportunity_ID() {
-		return Opportunity_ID;
+	public Integer getOpportunityID() {
+		return opportunityID;
 	}
-	public void setOpportunity_ID(Integer opportunity_ID) {
-		Opportunity_ID = opportunity_ID;
+	public void setOpportunityID(Integer opportunityID) {
+		this.opportunityID = opportunityID;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public Integer getPriorityLevel() {
-		return PriorityLevel;
+		return priorityLevel;
 	}
 	public void setPriorityLevel(Integer priorityLevel) {
-		PriorityLevel = priorityLevel;
+		this.priorityLevel = priorityLevel;
 	}
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
 }
