@@ -9,18 +9,6 @@
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
     background-color: #f8f9fd;
   }
-.botonRegistro {
-  margin-top: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
-    color: #fff;
-    padding: 10px 20px;
-}
-.botonRegistro:hover{
-  background: #6cf0c2;
-}
   
   input[type="text"],
   input[type="password"] {

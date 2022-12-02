@@ -1,5 +1,6 @@
 package com.CRM.CRM.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,20 +15,21 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "Contact")
 public class Contact {
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
+
+	@JsonProperty
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Contact_ID;
-	@NotBlank(message = "Method is mandatory") @JsonProperty
+	@JsonProperty
 	private String Method;
-	@NotBlank(message = "Date is mandatory") @JsonProperty
+	@JsonProperty
 	private java.sql.Date Date;
-	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Account_id", nullable = false) @JsonProperty
+    @JoinColumn(name = "Account_id", nullable = false)
     private Account account;
-	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Opportunity_id", nullable = false) @JsonProperty
+    @JoinColumn(name = "Opportunity_id", nullable = false)
     private Opportunity opportunity;
 	
 	public Account getAccount() {

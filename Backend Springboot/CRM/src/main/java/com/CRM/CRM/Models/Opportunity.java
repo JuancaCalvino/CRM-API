@@ -3,6 +3,7 @@ package com.CRM.CRM.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -19,23 +20,27 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "Opportunity")
 public class Opportunity {
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
+
+	@JsonProperty
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Opportunity_ID;
-	@NotBlank(message = "Name is mandatory") @JsonProperty
+	@JsonProperty
 	private String Name;
-	@NotBlank(message = "Priority is mandatory") @JsonProperty
+	@JsonProperty
 	private Integer PriorityLevel;
-	@NotBlank(message = "Status is mandatory") @JsonProperty
+	@JsonProperty
 	private String Status;
-	
+
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "User_id", nullable = false) @JsonProperty
+    @JoinColumn(name = "User_id", nullable = false)
     private User user;
-	
-	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JsonProperty
-	private ArrayList<Account> Accounts = new ArrayList<Account>();
-	
+
+	@JsonProperty
+	@OneToMany(mappedBy = "Account_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Account> Accounts;
+
+	@JsonProperty
 	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Contact> Contacts;
 	
@@ -45,10 +50,10 @@ public class Opportunity {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public ArrayList<Account> getAccounts() {
+	public List<Account> getAccounts() {
 		return Accounts;
 	}
-	public void setAccounts(ArrayList<Account> accounts) {
+	public void setAccounts(List<Account> accounts) {
 		Accounts = accounts;
 	}
 	public List<Contact> getContacts() {

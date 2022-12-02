@@ -2,6 +2,7 @@ package com.CRM.CRM.Models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -19,26 +20,27 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "Account")
 public class Account {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
+	@JsonProperty
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Account_ID;
-	@NotBlank(message = "Name is mandatory") @JsonProperty
+	@JsonProperty
 	private String Name;
-	@NotBlank(message = "Email is mandatory") @JsonProperty
+	@JsonProperty
 	private String Email;
-	@NotBlank(message = "Address is mandatory") @JsonProperty
+	@JsonProperty
 	private String Address;
-	@NotBlank(message = "Phone is mandatory") @JsonProperty
+	@JsonProperty
 	private long Phone;
-	@NotBlank @JsonProperty
+	@JsonProperty
 	private Boolean IsCustomer;
-	@NotBlank @JsonProperty
+	@JsonProperty
 	private Boolean IsActiveCustomer;
-	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false) @JsonProperty
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "opportunity_id", nullable = false)
     private Opportunity opportunity;
-	
-	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JsonProperty
+	@JsonProperty
+	@OneToMany(mappedBy = "Contact_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Contact> Contacts;
 	
 	public Opportunity getOpportunity() {

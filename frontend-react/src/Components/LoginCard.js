@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "./Styles/LoginCard.css";
 
+import { useNavigate } from "react-router-dom";
+
 function LoginCard(props) {
   const [enteredEmail, setEmail] = useState();
   const [enteredPassword, setPassword] = useState();
+
+  const navigate = useNavigate();
 
   function emailChangeHandler(event) {
     setEmail(event.target.value);
@@ -26,6 +30,11 @@ function LoginCard(props) {
 
     setEmail("");
     setPassword("");
+  }
+
+  function registerButtonHandler(event) {
+
+    navigate("/Register");
   }
 
   return (
@@ -59,6 +68,9 @@ function LoginCard(props) {
             </div>
           </form>
         </div>
+      </div>
+      <div className="button-container">
+          <button className="botonRegistro" onClick={registerButtonHandler}>Register</button>
       </div>
     </div>
   );

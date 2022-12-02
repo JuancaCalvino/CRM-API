@@ -18,7 +18,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-
 @Entity
 @Table(name = "Users")
 public class User {
@@ -26,25 +25,27 @@ public class User {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @JsonProperty
     private Integer User_ID;
 	
-	@NotBlank(message = "Name is mandatory") @JsonProperty
+    @JsonProperty
     private String Name;
 	
-	@NotNull(message = "Phone is mandatory") @JsonProperty
+	@JsonProperty
     private Integer Phone;
-	
-	@NotBlank(message = "Email is mandatory") 
+
+    @JsonProperty
 	@Email(message="Please provide a valid email address") 
 	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
-	@Column(unique=true) @JsonProperty
+	@Column(unique=true)
     private String Email;
 	
-	@NotBlank(message = "Address is mandatory") @JsonProperty
-    private String Address;	
-	
-	@Size(min = 4, max = 15) @NotBlank(message = "Password is mandatory") @JsonProperty
+    @JsonProperty
+    private String Address;
+
+    @JsonProperty
+	@Size(min = 4, max = 15)
     private String Password;
-	
-	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JsonProperty
+
+    @JsonProperty
+	@OneToMany(mappedBy = "Opportunity_ID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Opportunity> Opportunities;
 
     public List<Opportunity> getOpportunities() {

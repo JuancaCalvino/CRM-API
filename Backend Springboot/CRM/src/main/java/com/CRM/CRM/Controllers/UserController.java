@@ -27,7 +27,7 @@ public class UserController {
 	//Cuando se registra un usuario, comprueba y luego inserta
 	@CrossOrigin()
 	@PostMapping("/createUser")
-	public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
+	public ResponseEntity<User> registerUser(@RequestBody User user) {
 		
 		User usuario = userService.saveUser(user);
 		

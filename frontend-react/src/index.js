@@ -12,26 +12,33 @@ import {
 
 import Home from "./Routes/Home";
 import Root from './Routes/root';
+import Register from "./Routes/Register";
+import MainMenu from "./Routes/MainMenu";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root/>,
     children: [
-      {
-        path: "/Home",
+      { //Login
+        path: "/",
         element: <Home/>
       },
-      {
-        path: "",
+      { //Principal de registro
+        path: "/Register",
+        element: <Register/>
+      },
+      { //Principal de oportunidades
+        path: "/MainMenu",
+        element: <MainMenu/>
+      },
+      { //Para añadir más
+        path: "/",
         element: <></>
       }
     ]
   }
 ])
-
-
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

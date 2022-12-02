@@ -2,6 +2,7 @@ package com.CRM.CRM.Controllers;
 
 import java.util.List;
 
+import com.CRM.CRM.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,12 @@ public class OpportunityController {
 	@Autowired
 	OpportunityService opportunityService;
 
-	// Crea una oportunidad
+	// Crea una oportunidad con el usuario dado
 	@CrossOrigin()
 	@PostMapping("/createOpportunity")
-	public ResponseEntity<Opportunity> createOpportunity(@Valid @RequestBody Opportunity opportunity) {
+	public ResponseEntity<Opportunity> createOpportunity(@Valid @RequestBody Opportunity opportunity, User user) {
 
+		opportunity.setUser(user);
 		Opportunity oportunidad = opportunityService.saveOpportunity(opportunity);
 
 		if (oportunidad != null)
