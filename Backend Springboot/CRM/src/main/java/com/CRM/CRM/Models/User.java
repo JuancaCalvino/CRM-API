@@ -36,7 +36,7 @@ public class User {
 	@Size(min = 4, max = 15)
     private String password;
 
-	@OneToMany(mappedBy = "opportunityID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Opportunity> opportunities;
 
     public List<Opportunity> getOpportunities() {

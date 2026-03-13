@@ -14,17 +14,15 @@ public class AccountService {
 	@Autowired
 	AccountRepo accountRepository;
 
-	//Intenta guardar la cuenta recibida
-	public Account saveAcount(Account account) {
-	
-		accountRepository.save(account);
-		
+	// Intenta guardar la cuenta recibida
+	public Account saveAccount(Account account) {
+
 		return accountRepository.save(account);
 	}
 
 	// Devuelve todas las cuentas de la base de datos
 	public List<Account> retrieveAccounts() {
-		
+
 		return accountRepository.findAll();
 	}
 }

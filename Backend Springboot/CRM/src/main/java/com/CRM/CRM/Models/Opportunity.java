@@ -31,10 +31,10 @@ public class Opportunity {
     @JoinColumn(name = "User_id", nullable = false)
     private User user;
 
-	@OneToMany(mappedBy = "accountID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "opportunity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Account> accounts;
 
-	@OneToMany(mappedBy = "contactID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "opportunity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Contact> contacts;
 	
 	public User getUser() {

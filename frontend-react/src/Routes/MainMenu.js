@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import MainMenuCard from '../Components/MainMenuCard';
+import React from 'react';
 
 export default function MainMenu() {
 

@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
 } from "react-router-dom";
 
 import Home from "./Routes/Home";
@@ -31,10 +30,6 @@ const router = createBrowserRouter([
       { //Principal de oportunidades
         path: "/MainMenu",
         element: <MainMenu/>
-      },
-      { //Para añadir más
-        path: "/",
-        element: <></>
       }
     ]
   }

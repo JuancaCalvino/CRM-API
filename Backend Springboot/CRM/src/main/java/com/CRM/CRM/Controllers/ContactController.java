@@ -2,7 +2,6 @@ package com.CRM.CRM.Controllers;
 
 import java.util.List;
 
-import com.CRM.CRM.Models.Opportunity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +27,7 @@ public class ContactController {
 		Contact contacto = contactService.saveContact(contact);
 
 		if (contacto != null)
-			return new ResponseEntity<>(contacto, HttpStatus.OK);
+			return new ResponseEntity<>(contacto, HttpStatus.CREATED);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
@@ -40,7 +39,7 @@ public class ContactController {
 
 		List<Contact> contactsList = contactService.retrieveContacts();
 
-		if (contactsList.size() != 0)
+		if (!contactsList.isEmpty())
 			return new ResponseEntity<>(contactsList, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,15 +48,13 @@ public class ContactController {
 	// Actualiza el contacto dado
 	@CrossOrigin()
 	@PutMapping("/updateContact")
-	public ResponseEntity<Boolean> updateContact(Contact contact) {
+	public ResponseEntity<Boolean> updateContact(@RequestBody Contact contact) {
 
 		Boolean isUpdated = contactService.updateContact(contact);
 
-		if (isUpdated == true)
+		if (Boolean.TRUE.equals(isUpdated))
 			return new ResponseEntity<>(true, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
 	}
-
-	//Obtener contacto x
 }

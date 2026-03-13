@@ -3,9 +3,9 @@ import "./Styles/LoginCard.css";
 
 import { useNavigate } from "react-router-dom";
 
-function LoginCard(props) {
-  const [enteredEmail, setEmail] = useState();
-  const [enteredPassword, setPassword] = useState();
+function LoginCard({ sendLoginData }) {
+  const [enteredEmail, setEmail] = useState("");
+  const [enteredPassword, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -20,20 +20,18 @@ function LoginCard(props) {
     event.preventDefault();
 
     //Paso los datos al login
-
     const DatosLogin = {
       Email: enteredEmail,
       Password: enteredPassword
     }
 
-    props.sendLoginData(DatosLogin);
+    sendLoginData(DatosLogin);
 
     setEmail("");
     setPassword("");
   }
 
   function registerButtonHandler(event) {
-
     navigate("/Register");
   }
 

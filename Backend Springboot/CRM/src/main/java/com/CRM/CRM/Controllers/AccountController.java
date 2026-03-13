@@ -29,10 +29,10 @@ public class AccountController {
 	@PostMapping("/createAccount")
 	public ResponseEntity<Account> registerAccount(@Valid @RequestBody Account account) {
 
-		Account response = accountService.saveAcount(account);
+		Account response = accountService.saveAccount(account);
 
-		if (response == account)
-			return new ResponseEntity<>(response, HttpStatus.OK);
+		if (response != null)
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
@@ -44,7 +44,7 @@ public class AccountController {
 
 		List<Account> accountsList = accountService.retrieveAccounts();
 
-		if (accountsList.size() != 0)
+		if (!accountsList.isEmpty())
 			return new ResponseEntity<>(accountsList, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

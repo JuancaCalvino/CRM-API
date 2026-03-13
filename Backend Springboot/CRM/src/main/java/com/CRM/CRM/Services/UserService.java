@@ -24,16 +24,12 @@ public class UserService {
 	// base de datos
 	public List<User> loginUser(User user) {
 
-		List<User> userList = userRepository.findByEmailPassword(user.getEmail(), user.getPassword());
-
-		return userList;
+		return userRepository.findByEmailPassword(user.getEmail(), user.getPassword());
 	}
 
 	// Devuelve todos los usuarios
 	public List<User> retrieveUsers() {
 
-		List<User> userList = userRepository.findAll();
-
-		return userList;
+		return userRepository.findAll();
 	}
 }

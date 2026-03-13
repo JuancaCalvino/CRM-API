@@ -12,7 +12,7 @@ import com.CRM.CRM.Models.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
 
-	@Query(value = "SELECT * FROM Users u WHERE u.Email = :Email AND u.Password = :Password", nativeQuery = true)
-	List<User> findByEmailPassword(@Param("Email") String Email, @Param("Password") String Password);
+	@Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
+	List<User> findByEmailPassword(@Param("email") String email, @Param("password") String password);
 
 }

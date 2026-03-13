@@ -39,7 +39,7 @@ public class Account {
     @JoinColumn(name = "opportunity_id", nullable = false)
     private Opportunity opportunity;
 	@JsonProperty
-	@OneToMany(mappedBy = "contactID", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Contact> contacts;
 	
 	public Opportunity getOpportunity() {
@@ -55,11 +55,11 @@ public class Account {
 		this.contacts = contacts;
 	}
 	
-	public Integer getAccount_ID() {
+	public Integer getAccountID() {
 		return accountID;
 	}
-	public void setAccount_ID(Integer account_ID) {
-		accountID = account_ID;
+	public void setAccountID(Integer accountID) {
+		this.accountID = accountID;
 	}
 	public String getName() {
 		return name;

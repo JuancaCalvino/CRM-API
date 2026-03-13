@@ -1,19 +1,16 @@
 import { useState } from "react";
 import "./Styles/RegisterCard.css";
 
-import { useNavigate } from "react-router-dom";
-
 import validator from "validator"; //Para validaciones de formato de inputs
 
-function LoginCard(props) {
+function RegisterCard({ sendRegisterData }) {
 
-  const [enteredEmail, setEmail] = useState();
-  const [enteredPassword, setPassword] = useState();
-  const [enteredName, setName] = useState();
-  const [enteredPhone, setPhone] = useState();
-  const [enteredAddress, setAddress] = useState();
-
-  const navigate = useNavigate();
+  const [enteredEmail, setEmail] = useState("");
+  const [enteredPassword, setPassword] = useState("");
+  const [enteredName, setName] = useState("");
+  const [enteredPhone, setPhone] = useState("");
+  const [enteredAddress, setAddress] = useState("");
+  const [message, setMessage] = useState("");
 
   function passwordChangeHandler(event) {
     setPassword(event.target.value);
@@ -27,7 +24,6 @@ function LoginCard(props) {
     event.preventDefault();
 
     //Paso los datos al registro
-
     const DatosRegistro = {
       Email: enteredEmail,
       Password: enteredPassword,
@@ -36,20 +32,17 @@ function LoginCard(props) {
       Address: enteredAddress
     }
 
-    props.sendRegisterData(DatosRegistro);
+    sendRegisterData(DatosRegistro);
 
     setEmail("");
     setPassword("");
     setName("");
     setPhone("");
     setAddress("");
-
-    //navigate("/MainMenu"); //Cuando el registro es bueno me voy a Main Menu
   }
 
   //Valida MAIL
-  const [message, setMessage] = useState("");
-  const validateEmail = (e) => {
+  function validateEmail(e) {
     var email = e.target.value;
 
     if (validator.isEmail(email)) {
@@ -58,24 +51,22 @@ function LoginCard(props) {
     } else {
       setMessage("Please, enter valid Email!");
     }
+  }
+
+  //Valida PHONE
+  function phoneChangeHandler(event) {
+    const result = event.target.value.replace(/\D/g, '');
+
+    if (result !== '') {
+      setPhone(Number(result));
     }
+  }
 
-    //Valida PHONE
-    const phoneChangeHandler = event => {
-        const result = event.target.value.replace(/\D/g, '');
-
-        if(result !== '')
-        {
-            setPhone(Number(result));
-        }
-    }
-
-    //Valida NAME
-    const nameChangeHandler = event => {
-        const result = event.target.value.replace(/[^a-z ]/gi, '');
-
-        setName(result);
-    }
+  //Valida NAME
+  function nameChangeHandler(event) {
+    const result = event.target.value.replace(/[^a-z ]/gi, '');
+    setName(result);
+  }
 
   return (
     <div className="card">
@@ -112,7 +103,7 @@ function LoginCard(props) {
                 type="text"
                 name="email"
                 required
-                onChange={(e) => validateEmail(e)}
+                onChange={validateEmail}
                 />
                 <br/>
                 <span style={{fontWeight: "bold", color: "red"}}>
@@ -151,4 +142,4 @@ function LoginCard(props) {
     </div>
   );
 }
-export default LoginCard;
+export default RegisterCard;

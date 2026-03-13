@@ -24,15 +24,15 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	//Cuando se registra un usuario, comprueba y luego inserta
+	// Cuando se registra un usuario, comprueba y luego inserta
 	@CrossOrigin()
 	@PostMapping("/createUser")
-	public ResponseEntity<User> registerUser(@RequestBody User user) {
-		
+	public ResponseEntity<User> registerUser(@Valid @RequestBody User user) {
+
 		User usuario = userService.saveUser(user);
-		
-		if(usuario != null)
-			return new ResponseEntity<>(usuario, HttpStatus.OK);
+
+		if (usuario != null)
+			return new ResponseEntity<>(usuario, HttpStatus.CREATED);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
@@ -41,24 +41,24 @@ public class UserController {
 	// un 404 (contraseña o correo no coincide con base de datos)
 	@CrossOrigin()
 	@PostMapping("/searchUser")
-	public ResponseEntity<User> loginUser(@RequestBody User user) {		
+	public ResponseEntity<User> loginUser(@RequestBody User user) {
 
 		List<User> usuarioEncontrado = userService.loginUser(user);
 
-		if (usuarioEncontrado.size() != 0)
+		if (!usuarioEncontrado.isEmpty())
 			return new ResponseEntity<>(usuarioEncontrado.get(0), HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	// Devuelve todos los usuarios
 	@CrossOrigin()
 	@GetMapping("/getUsers")
 	public ResponseEntity<List<User>> returnsUsers() {
-		
+
 		List<User> userList = userService.retrieveUsers();
-		
-		if(userList.size()!=0)
+
+		if (!userList.isEmpty())
 			return new ResponseEntity<>(userList, HttpStatus.OK);
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,43 +1,39 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import RegisterCard from '../Components/RegisterCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
 
-    const[email, setEmail] = useState();
-    const[password, setPassword] = useState();
-    const[name, setName] = useState();
-    const[phone, setPhone] = useState();
-    const[address, setAddress] = useState();
+    const navigate = useNavigate();
 
-    function getRegisterData(data) {
-        setEmail(data.Email)
-        setPassword(data.Password)
-        setName(data.Name)
-        setPhone(data.Phone)
-        setAddress(data.Address)
-    }
-
-    //Hace el post al back con los datos introducidos en el registro
-    useEffect(() => {
+    // Hace el post al back con los datos introducidos en el registro
+    function handleRegister(data) {
         const requestOptions = {
           method: "POST",
-
           headers: { "Content-Type": "application/json" },
-
           body: JSON.stringify({
-            Email: email,
-            Password: password,
-            Address: address,
-            Phone: phone,
-            Name: name,
+            email: data.Email,
+            password: data.Password,
+            address: data.Address,
+            phone: data.Phone,
+            name: data.Name,
           }),
         };
+
         fetch("http://localhost:8080/api/user/createUser", requestOptions)
-    })
+          .then((response) => {
+            if (response.ok) {
+              navigate("/MainMenu");
+            }
+          })
+          .catch((error) => {
+            console.error("Error en registro:", error);
+          });
+    }
 
     return (
         <main>
-            <RegisterCard sendRegisterData={getRegisterData}/>
+            <RegisterCard sendRegisterData={handleRegister}/>
         </main>
     )
 }
