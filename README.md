@@ -1,5 +1,10 @@
 # CRM API Project
 
+[![Frontend](https://img.shields.io/badge/Frontend-React.js-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Backend](https://img.shields.io/badge/Backend-Spring_Boot-6DB33F?style=flat&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Language](https://img.shields.io/badge/Language-Java_17-ED8B00?style=flat&logo=openjdk&logoColor=white)](https://docs.oracle.com/en/java/javase/17/)
+[![Database](https://img.shields.io/badge/Database-H2-007396?style=flat&logo=database&logoColor=white)](https://h2database.com/)
+
 This is a full-stack Customer Relationship Management (CRM) application designed to manage users, accounts, contacts, and sales opportunities. 
 
 ## 🛠️ Technology Stack
