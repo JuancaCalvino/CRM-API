@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.idea/
+.vscode/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.zip
+*.tar.gz
+*.rar
